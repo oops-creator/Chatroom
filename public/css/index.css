@@ -1,0 +1,38 @@
+.full-height {
+    height: 100%;
+  }
+
+
+  .nav-button{
+
+    border: none;
+    background: none;
+
+  }
+
+  
+#send{
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+
+
+  
+}
+
+#send-button{
+  background-color: darkorange;
+}
+
+#messages{
+  min-height: 100%;
+  background-color:lightgray;
+}
+  
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
