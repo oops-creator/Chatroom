@@ -29,19 +29,20 @@ app.use(express.static(pubDir))
 
 //--------------------------------------------------
 
-// app.get("" , (req , res)=>{
-//     res.render('index')
-// })
+app.get("" , (req , res)=>{
+    res.render('index')
+})
 
 
-// io.on('connection' , (socket)=>{
-//     console.log('New client connected')
-//     socket.emit('message' , 'Welcome')
-//     socket.on('message' , (retval)=>{
-//         console.log(retval)
-//     })
+io.on('connection' , (socket)=>{
+    console.log('New client connected')
 
-// })
+    socket.on('message' , (receivedMessage)=>{
+        console.log(receivedMessage)
+        io.emit('message' , receivedMessage)
+    })
+
+})
 
 
 
@@ -52,6 +53,20 @@ app.use(express.static(pubDir))
 server.listen(port , ()=>{
     console.log(`The server is up and running on port ${port}`)
 })
+
+
+function shutdown() {
+    server.close(function onServerClosed (err) {
+      if (err) {
+        console.error(err)
+        process.exit(1)
+      }
+    })
+}
+
+process.on('SIGINT', function onSigterm () {
+    shutdown()
+  })
 
 
 

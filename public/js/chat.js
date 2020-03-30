@@ -1,13 +1,25 @@
 const socket = io()
+const messageTemplate = "<div><p> {{message}} </p></div>"
+const messages = document.getElementById('messages')
 
-// socket.on('message'  ,(mess)=>{
-//     console.log(mess)
-    
-    
-// })
 
-// document.getElementById('sendid').addEventListener('click' , ()=>{
-//    const retval =  document.getElementById('chatid').value
-//    console.log(retval)
-//    socket.emit('message' , retval)
-// })
+socket.on('message'  ,(message)=>{
+
+    
+    mustacheMessage = {message:message}
+    const html = Mustache.render(messageTemplate , mustacheMessage)
+    messages.insertAdjacentHTML('beforeend'  , html)
+
+    
+})
+
+document.getElementById('send-button').addEventListener('click' , (e)=>{
+   e.preventDefault()
+   const messageToSend =  document.getElementById('message-to-send').value
+   console.log(messageToSend)
+   socket.emit('message' , messageToSend)
+
+   document.getElementById('message-to-send').value = ""
+   document.getElementById('message-to-send').focus()
+
+})
