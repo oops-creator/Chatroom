@@ -1,14 +1,15 @@
 const socket = io()
-const messageTemplate = "<div><p> {{message}} </p></div>"
+const messageTemplate = document.getElementById('message-template').innerHTML
 const messages = document.getElementById('messages')
 
 
 socket.on('message'  ,(message)=>{
 
-    
-    mustacheMessage = {message:message}
+    console.log(messageTemplate)
+    mustacheMessage = {usermessage:message , username:'ehe'}
     const html = Mustache.render(messageTemplate , mustacheMessage)
     messages.insertAdjacentHTML('beforeend'  , html)
+    console.log(html)
 
     
 })

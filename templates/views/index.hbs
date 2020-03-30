@@ -24,6 +24,14 @@
     </div>
 
 
+   <script id="message-template" type="x-tmpl-mustache"> 
+  
+        <div class='messagebody'>
+            <div class='username'> \{{username}} </div>
+            <div class='usermessage'> \{{usermessage}}</div>
+        </div>
+    </script>
+
     <script src="/js/mustache.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>

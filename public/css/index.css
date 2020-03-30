@@ -29,10 +29,33 @@
 #messages{
   min-height: 100%;
   background-color:lightgray;
+  padding: 0.3em;
+  padding-bottom: 100px;
 }
   
 
 html, body {
   height: 100%;
   margin: 0;
+}
+
+.username{
+
+  font-size: 1.1em;
+  font-weight: bold ;
+  color: crimson;
+
+}
+
+.usermessage{
+  min-height: 20px;
+}
+.messagebody{
+  background-color: #81c3d4;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 5px;
+  width: fit-content;
+  min-width: 200px;
+
 }
