@@ -30,9 +30,12 @@ app.use(express.static(pubDir))
 //--------------------------------------------------
 
 app.get("" , (req , res)=>{
-    res.render('index')
+    res.render('login')
 })
 
+app.get("/chat" , (req , res)=>{
+    res.render('index')
+})
 
 io.on('connection' , (socket)=>{
     console.log('New client connected')
