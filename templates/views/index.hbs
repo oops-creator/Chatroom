@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{title}}</title>
 
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
@@ -32,9 +32,13 @@
         </div>
     </script>
 
+    <script>var t = "{{title}}"</script>
+
     <script src="/js/mustache.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/qs.min.js"></script>
     <script src="/js/chat.js"></script>
+
 </body>
 
 </html>

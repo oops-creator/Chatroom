@@ -25,24 +25,39 @@ hbs.registerPartials(partialPath)
 app.set('view engine' ,'hbs')
 app.set('views' , viewsPath)
 app.use(express.static(pubDir))
+app.use(express.urlencoded());
+app.use(express.json());
 
 
 //--------------------------------------------------
 
 app.get("" , (req , res)=>{
-    res.render('login')
+    res.render('login' , {title:'Chatroom'})
+})
+
+app.post("/chat" , (req , res)=>{
+    console.log(req.body)
+    res.render('index')
+    
 })
 
 app.get("/chat" , (req , res)=>{
-    res.render('index')
+
+    res.render('index',{title:'Chatroom'})
 })
 
 io.on('connection' , (socket)=>{
     console.log('New client connected')
 
-    socket.on('message' , (receivedMessage)=>{
+    socket.on('join' , ({username , room})=>{
+        socket.join(room)
+        
+
+    })
+
+    socket.on('message' , (receivedMessage , username , room)=>{
         console.log(receivedMessage)
-        io.emit('message' , receivedMessage)
+        io.to(room).emit('message' , receivedMessage, username)
     })
 
 })
