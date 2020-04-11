@@ -3,6 +3,7 @@ const path = require('path')
 const http = require('http')
 const hbs = require('hbs')
 const socketio = require('socket.io')
+const {addUser, removeUser, getUser, getUsersInRoom}  = require('./src/user')
 
 
 //--------------------------------------------------
@@ -49,15 +50,29 @@ app.get("/chat" , (req , res)=>{
 io.on('connection' , (socket)=>{
     console.log('New client connected')
 
-    socket.on('join' , ({username , room})=>{
+    socket.on('join' , ({username , room} , callback)=>{
         socket.join(room)
+        const {error , user} = addUser({ id:socket.id , username , room})
+        if(error){
+            return callback(error);
+            
+
+        }
         
+        callback();
 
     })
 
     socket.on('message' , (receivedMessage , username , room)=>{
         console.log(receivedMessage)
         io.to(room).emit('message' , receivedMessage, username)
+    })
+
+    socket.on('disconnect' , ()=>{
+        const user = removeUser(socket.id);
+        if(user){
+            io.to(user.room).emit('notif' , `${user.username} has left`)
+        }
     })
 
 })

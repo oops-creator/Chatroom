@@ -45,5 +45,16 @@ document.getElementById('send-button').addEventListener('click' , (e)=>{
 
 
 })
-socket.emit('join' , {username , room})
+
+socket.on('notif' , (toLog)=>{
+    console.log(toLog)
+})
+
+
+socket.emit('join' , {username , room} , (error)=>{
+    if(error){
+        alert(error);
+        location.href = '/'
+    }
+})
 
